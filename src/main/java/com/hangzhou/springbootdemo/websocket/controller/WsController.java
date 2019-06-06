@@ -29,14 +29,14 @@ public class WsController {
     @MessageMapping("/chat")
     public void handleChat(Principal principal, String msg){
         //Spring MVC中可以直接在参数中获得principal，principal中包含当前用户的信息
-
-        if(principal.getName().equals("wyf")){
+        System.out.println("聊天成功......");
+        if(principal.getName().equals("wjs")){
             //测试用，实际情况需根据需求编写这里判断若发件人是wyf，则发给wisely；若是wisely则发给wyf
-            messageingTemplate.convertAndSendToUser("wisely", "/queue/notifications", principal.getName() + "-send:" + msg);
+            messageingTemplate.convertAndSendToUser("ktt", "/queue/notifications", principal.getName() + "-send:" + msg);
             //通过messageingTemplate.convertAndSendToUser向用户发送信息
             //第一个参数为接收用户，第二个参数为订阅地址，第三个为消息
         }else{
-            messageingTemplate.convertAndSendToUser("wyf", "/queue/notifications", principal.getName() + "-send:" + msg);
+            messageingTemplate.convertAndSendToUser("wjs", "/queue/notifications", principal.getName() + "-send:" + msg);
         }
     }
 
