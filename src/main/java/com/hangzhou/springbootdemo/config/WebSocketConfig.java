@@ -25,6 +25,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/endpointWisely").withSockJS();//注册一个STOMP的endpoint,并指定使用SockJS协议
         //registry.addEndpoint("/hello").setAllowedOrigins("*").withSokJS();
         //这个和客户端创建连接时的url有关，其中setAllowedOrigins()方法表示允许连接的域名，withSockJS()方法表示支持以SockJS方式连接服务器。
+        /**
+         * 点对点模式
+         */
+        registry.addEndpoint("/endpointChat").withSockJS();
     }
 
     /**
@@ -34,7 +38,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) { //配置消息代理（Message Broker）
-        registry.enableSimpleBroker("/topic");//广播式应配置一个/topic消息代理
+        /**
+         * 广播模式
+         */
+        //registry.enableSimpleBroker("/topic");//广播式应配置一个/topic消息代理
+        /**
+         * 点对点模式
+         */
+        registry.enableSimpleBroker("/queue","/topic");//新增一个用于点对点的消息代理/queue
     }
 
     /* PS

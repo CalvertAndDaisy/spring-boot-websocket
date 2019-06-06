@@ -32,7 +32,7 @@
     }
 
     function connect() {
-        var socket = new SockJS('/taotao/endpointWisely'); //连接SockJS的endpoint名称为/endpointWisely，注意路径
+        var socket = new SockJS('/endpointWisely'); //连接SockJS的endpoint名称为/endpointWisely，注意路径
         stompClient = Stomp.over(socket);//使用STOMP子协议的WebSocket客户端
         stompClient.connect({}, function(frame) {//连接WebSocket服务端
             setConnected(true);
